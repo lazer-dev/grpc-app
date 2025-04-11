@@ -1,0 +1,5 @@
+dependencies {
+    implementation project(":api-schema")
+    implementation "org.springframework.grpc:spring-grpc-spring-boot-starter"
+    implementation 'io.grpc:grpc-services'
+}

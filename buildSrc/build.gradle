@@ -1,0 +1,13 @@
+plugins {
+    id 'idea'
+}
+
+repositories {
+    mavenCentral()
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+dependencies {
+    implementation "org.apache.commons:commons-lang3:3.17.0"
+}

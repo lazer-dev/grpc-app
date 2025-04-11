@@ -1,0 +1,55 @@
+import app.service.gradle.task.DownloadProtoSwaggerGeneratorTask
+
+plugins {
+    id 'com.google.protobuf'
+}
+
+dependencies {
+    api 'io.grpc:grpc-stub'
+    api 'io.grpc:grpc-protobuf'
+    api 'io.grpc:grpc-protobuf-lite'
+    api 'io.grpc:grpc-netty-shaded'
+    api 'com.google.protobuf:protobuf-java'
+}
+
+def binaryPath = "$rootDir/protoc-gen-openapiv2"
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc'
+    }
+
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java'
+        }
+
+        openapi {
+            path = binaryPath
+        }
+    }
+
+    generateProtoTasks {
+        all().each { task ->
+            task.plugins {
+                grpc {
+                    option 'jakarta_omit'
+                    option '@generated=omit'
+                }
+
+                openapi {
+                    outputSubDir = 'openapi'
+                }
+            }
+        }
+    }
+}
+
+tasks.register('downloadBinary', DownloadProtoSwaggerGeneratorTask) {
+    version = "v2.26.3"
+    outputPath = binaryPath
+}
+
+generateProto {
+    dependsOn 'downloadBinary'
+}

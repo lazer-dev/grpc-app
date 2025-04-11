@@ -1,0 +1,13 @@
+pluginManagement {
+    plugins {
+        id 'org.springframework.boot' version "$springBootVersion"
+        id 'io.spring.dependency-management' version "$springDependencyManagement"
+        id 'com.google.protobuf' version "$protobufVersion"
+    }
+}
+
+rootProject.name = 'grpc'
+
+include 'server-app',
+        'client-app',
+        'api-schema'
