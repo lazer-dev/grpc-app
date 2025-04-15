@@ -1,0 +1,3 @@
+[submodule "api-schema/src/main/proto"]
+	path = api-schema/src/main/proto
+	url = git@github.com:lazer-dev/grpc-app-schema.git
